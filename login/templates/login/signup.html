@@ -1,0 +1,31 @@
+{% block content %}
+    <h2>Sign up</h2>
+    <form method="post">
+        {% csrf_token %}
+        {#        {{ user_form.as_p }}#}
+        {#        {{ profile_form.as_p }}#}
+        {% for field in user_form %}
+            <p>{{ field.label_tag }}</p><br>
+            {{ field }}
+            {% if field.help_text %}
+                <small style="display:none;">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+                <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+        {% for field in profile_form %}
+            <p>{{ field.label_tag }}</p><br>
+            {{ field }}
+            {% if field.help_text %}
+                <small style="display:none;">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+                <p style="color: red;">{{ error }}</p>
+            {% endfor %}
+        {% endfor %}
+        <script src='https://www.google.com/recaptcha/api.js'></script>
+        <div class="g-recaptcha" data-sitekey="6Ld4z1sUAAAAAGkeLVG2ZKqxoU_bwIn9p7hh1-KI"></div>
+        <button type="submit">Sign up</button>
+    </form>
+{% endblock %}
